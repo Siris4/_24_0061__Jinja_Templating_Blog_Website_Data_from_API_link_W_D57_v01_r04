@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Blog - Posts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body>
+<div class="wrapper">
+    <div class="top">
+        <div class="title"><h1>My Blog - Posts</h1></div>
+    </div>
+    <div class="content">
+        {% if post %} <!-- Single post scenario -->
+            <div class="card">
+                <h2>{{ post["title"] }}</h2>
+                <p>{{ post["subtitle"] }}</p>
+                <div>{{ post["body"] }}</div>
+            </div>
+        <a href="{{ url_for('get_blog', num=10) }}">Back</a>
+        {% else %} <!-- List of posts scenario -->
+            {% for post in posts %}
+                <div class="card">
+                    <h2>{{ post["title"] }}</h2>
+                    <p>{{ post["subtitle"] }}</p>
+                    <a href="{{ url_for('post', post_id=post['id']) }}">Read</a>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <a href="{{ url_for('home') }}">HomePage</a>
+</div>
+<footer>
+    <p>Made with ♥️ in San Diego, California.</p>
+</footer>
+</body>
+</html>
